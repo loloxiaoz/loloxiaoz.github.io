@@ -2,6 +2,6 @@
 	"title" : "loloxiaoz的个人博客",
 	"author" : "loloxiaoz",
 	"language" : "zh-hans",
-	"plugins" : ["todo", "accordion", "simple-page-toc"]
+	"plugins" : ["accordion", "simple-page-toc"]
 
 }
