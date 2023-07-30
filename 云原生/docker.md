@@ -1,5 +1,28 @@
 # docker
 
+NameSpacce视图隔离, cgroups 资源隔离。 容器镜像本质就是容器的根文件系统rootfs
+
+Namespace
+* ipc
+* Network
+* UTS  : 主机与域名
+* Mount
+* pid
+
+UnionFS
+* 将多个disk挂在在同一个目录下
+* 将一个readonly branch 和 writeonly branch 联合在一起
+
+Bootfs 启动的fs， rootfs就是正常的linux目录
+
+
+
+
+对 Docker 项目来说，它最核心的原理实际上就是为待创建的用户进程：
+1、启用 Linux Namespace 配置
+2、设置指定的 Cgroups 参数
+3、切换进程的根目录（Change Root）
+
 docker通常用于如下场景：
 1、web应用的自动化打包和发布
 2、自动化测试与持续集成、发布
