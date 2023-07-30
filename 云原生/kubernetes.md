@@ -33,6 +33,14 @@
 
 ## 基本组件
 
+![主要组件](./images/k8s主要组件.png)
+![主要架构](./images/pod主要组件.png)
+
+### etcd
+
+- 保存所有的网络配置
+- 保存所有对象的状态信息，元信息配置
+
 ### kubelet
 
 kubelet管理master和node之间的通信，管理机器上运行的pods和containers容器, 由systemd托管的， 是k8s 的init system。 可以通过指定目录的方式将k8s的核心组件全部拉起
@@ -143,6 +151,8 @@ ingress controller的pod，由于网络隔离的原因，还需要对外通过se
 
 ### 存储
 
+- CSI: 容器存储接口，提供存储资源
+
 Union File System联合文件系统，将多个不同位置的目录联合挂载到同一个目录下，增量rootfs层
 只读层 + init层 + 可读写层， whiteout 覆盖只读层的文件
 init层只对当前的docker生效，在提交时智慧提交可读写层， 不包含init层
@@ -166,6 +176,16 @@ Volume机制，允许将宿主机指定的目录或者文件，挂载到容器�
 
 ### 网络插件
 
+- CNI：容器网络接口，提供网络资源
+  - 保证pod拥有集群内唯一的IP地址
+  - 保证不同节点的IP地址划分不会重复
+  - 保证跨节点的IP地址划分不会重复
+  - 保证不同节点的pod可以跨节点的主机互相通信
+
+- Flannel的作用
+  - 为每个node分配subnet，容器将自动从该子网中获取IP地址
+  - 当有node加入到网络时，为每个node增加路由配置
+
 netfilter子系统的作用，就是在Linux内核里挡在网卡 和 用户态进程之间的一道 ”防火墙“
 network policy其实只是宿主机上的一系列iptables的规则, 已经实现network policy的网络查件包括 calico、weave 和 kube-router
 通过控制循环的方式对network policy对象的增删改查做出响应，然后在宿主机上完成iptables规则的配置工作
@@ -187,8 +207,8 @@ Docker on Mac 以及windows Docker（Hyper -V实现） 实际上是基于虚拟�
 
 ## 高可用
 
-1、kubeapi-server、etcd是多实例且同时运行的
-2、controller manager和kube-scheduler是同时运行，但只有一个实例起作用，其他的实例处于待命状态
-3、唯一能和etcd通信的，是kubeapi-server组件，其他所有组件都是通过kubeapi-server通信
-4、api-server实现了乐观锁机制，保证集群的状态是一致的
-5、kubectl 通过一个http post请求到api-server上
+- kubeapi-server、etcd是多实例且同时运行的
+- controller manager和kube-scheduler是同时运行，但只有一个实例起作用，其他的实例处于待命状态
+- 唯一能和etcd通信的，是kubeapi-server组件，其他所有组件都是通过kubeapi-server通信
+- api-server实现了乐观锁机制，保证集群的状态是一致的
+- kubectl 通过一个http post请求到api-server上
