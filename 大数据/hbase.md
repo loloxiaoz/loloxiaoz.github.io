@@ -1,0 +1,57 @@
+# HBase
+
+> HBase是一个分布式的、面向列的开源数据库，该技术源于Google 论文“Bigtable”，一个结构化数据的分布式存储系统。 HBase在Hadoop至上提供了类似于Bigtable的能力。
+
+LSM（log-structureed merge tree) 存储引擎和b树存储引擎一样。
+将对数据的修改增量保持在内存中，达到指定的大小限制后将这些修改批量写入到磁盘，读取的时候需要合并磁盘中历史数据和内存中的最近修改，所以写入性能大大提升，看是否命中内存。 基于LSM树实现的HBase写入性能比mysql高了一个数量级，读性能低了一个数量级
+LSM树院里是把一颗大树拆分成N棵小树，首先写入内存中，随着小树越来越大，内存中的小树会flush到磁盘中，磁盘中的树可以定期做merge操作，合并成一棵大树，以优化读性能
+
+1、Hbase中，string的判断，使用.equal
+2、加入addcolumn指定限制返回的列。 返回固定的列，能大幅度提高效率
+3、HBase 的setStartRow 包含此行， setStopRow不包含此行
+4、Hadoop中比较常用的压缩方法有 gzip，bzip2，lzo，snappy。 gzip和bzip2压缩效率高，但耗费cpu。因此在cpu与io之间的平衡，使用lzo与snappy比较常见。
+
+Hbase不同于一般的关系型数据库，是一个适合非结构化数据存储的数据。另一个不同的是Hbase是基于列的而不是基于行的模式。
+
+Hbase的名字来源是Hadoop database。 即hadoop数据库。
+Hbase从另一个方向来解决可伸缩性的问题。它自底向上地构建，能够简单地通过增加特定节点来达到线性扩展。HBase并不是关系型数据库，不支持SQL。但在特定的问题空间里，它能够做RDBMS不能做的事，在廉价硬件构成的集群上管理超大规模的稀疏表。HBase表和RDBMS中的表类似，单元格有版本，行是排序的，只要列族预先定义，客户端可以随时把列添加到列族中去。
+
+加锁
+无论对行进行访问的事物牵涉到多少列，对行的更行都是“原子的” 这使得“加锁模型”能够保持简单
+
+HBase采用一个Master节点协调管理一个或多个RegionServer从属机，HBase主控机负责启动和全新的安装，把区域分配给注册的RegionServer，恢复Regionserver的故障。master的负载很轻。Regionserver负责多个区域的管理以及响应客户端的读写请求。
+表中的项实用区域名作为键。区域名由所属的表名、区域的起始行、区域的创建时间以及对其整体进行MD5哈希值。表的键是排序的。因此，要查找一个特定行所在的区域只要在目录表中找到第一个大于或等于给定行键即可。
+HBase有两张特殊的表，ROOT和META
+O.META:记录了用户表的Region信息，.META.可以有多个region
+O.ROOT.记录了META表的Region信息, .-ROOT只有一个region
+
+　Client访问用户数据之前需要首先访问zookeeper，然后访问-ROOT-表，接着访问.META.表，最后才能找到用户数据的位置去访问，中间需要多次网络操作，不过client端会做cache缓存。
+Client
+　　HBase Client使用HBase的RPC机制与HMaster和HRegionServer进行通信，对于管理类操作，Client与HMaster进行RPC；对于数据读写类操作，Client与HRegionServer进行RPC
+Zookeeper
+　　Zookeeper Quorum中除了存储了-ROOT-表的地址和HMaster的地址，HRegionServer也会把自己以Ephemeral方式注册到Zookeeper中，使得HMaster可以随时感知到各个HRegionServer的健康状态。此外，Zookeeper也避免了HMaster的单点问题，见下文描述
+HMaster
+　　HMaster没有单点问题，HBase中可以启动多个HMaster，通过Zookeeper的Master Election机制保证总有一个Master运行，HMaster在功能上主要负责Table和Region的管理工作：
+　　1. 管理用户对Table的增、删、改、查操作
+　　2. 管理HRegionServer的负载均衡，调整Region分布
+　　3. 在Region Split后，负责新Region的分配
+　　4. 在HRegionServer停机后，负责失效HRegionServer 上的Regions迁移
+HRegionServer主要负责响应用户I/O请求，向HDFS文件系统中读写数据，是HBase中最核心的模块。
+
+HStore存储是HBase存储的核心了，其中由两部分组成，一部分是MemStore，一部分是StoreFiles。MemStore是Sorted Memory Buffer，用户写入的数据首先会放入MemStore，当MemStore满了以后会Flush成一个StoreFile（底层实现是HFile），当StoreFile文件数量增长到一定阈值，会触发Compact合并操作，将多个StoreFiles合并成一个StoreFile，合并过程中会进行版本合并和数据删除，因此可以看出HBase其实只有增加数据，所有的更新和删除操作都是在后续的compact过程中进行的，这使得用户的写操作只要进入内存中就可以立即返回，保证了HBase I/O的高性能。当StoreFiles Compact后，会逐步形成越来越大的StoreFile，当单个StoreFile大小超过一定阈值后，会触发Split操作，同时把当前Region Split成2个Region，父Region会下线，新Split出的2个孩子Region会被HMaster分配到相应的HRegionServer上，使得原先1个Region的压力得以分流到2个Region上。下图描述了Compaction和Split的过程：
+　　
+
+在理解了上述HStore的基本原理后，还必须了解一下HLog的功能，因为上述的HStore在系统正常工作的前提下是没有问题的，但是在分布式系统环境中，无法避免系统出错或者宕机，因此一旦HRegionServer意外退出，MemStore中的内存数据将会丢失，这就需要引入HLog了。每个HRegionServer中都有一个HLog对象，HLog是一个实现Write Ahead Log的类，在每次用户操作写入MemStore的同时，也会写一份数据到HLog文件中（HLog文件格式见后续），HLog文件定期会滚动出新的，并删除旧的文件（已持久化到StoreFile中的数据）。当HRegionServer意外终止后，HMaster会通过Zookeeper感知到，HMaster首先会处理遗留的 HLog文件，将其中不同Region的Log数据进行拆分，分别放到相应region的目录下，然后再将失效的region重新分配，领取 到这些region的HRegionServer在Load Region的过程中，会发现有历史HLog需要处理，因此会Replay HLog中的数据到MemStore中，然后flush到StoreFiles，完成数据恢复。
+
+HBase是介于Map Entry(key & value)和DB Row之间的一种数据存储方式。就点有点类似于现在流行的Memcache，但不仅仅是简单的一个key对应一个 value，你很可能需要存储多个属性的数据结构，但没有传统数据库表中那么多的关联关系，这就是所谓的松散数据。
+
+简单来说，你在HBase中的表创建的可以看做是一张很大的表，而这个表的属性可以根据需求去动态增加，在HBase中没有表与表之间关联查询。你只需要 告诉你的数据存储到Hbase的那个column families 就可以了，不需要指定它的具体类型：char,varchar,int,tinyint,text等等。但是你需要注意HBase中不包含事务此类的功 能
+Hbase在另一个方向上来解决可伸缩性的问题。它自底向上地构建，能够简单
+注意点
+1、有一个索引用来方便值的随机访问，但是访问一个单元的坐标要是太大的话，会占用很大的内存，这个索引会被用尽。
+2、避免使用时间戳或者单调递增时序的key
+3、行键永远不变
+4、尽量最小化行和列的大小。
+
+4、以任何可被转为字节数组的东西可以作为值存入
+there are no joins in HBase you're just more aware of this fact.
