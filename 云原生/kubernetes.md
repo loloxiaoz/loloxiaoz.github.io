@@ -8,19 +8,19 @@
 
 一旦要追求普适性，那就一定要从顶层开始做好设计
 
-声明式API: 一切都是资源, 自动化, 兼顾性能、API完备性、版本化、向后兼容等很多工程化指标
-控制器模式:
-自定义CRD: CRD(Custom Resource Definition), 自定义API资源
-插件机制: 
-调度: 把一个容器按照某种规则，放置到某个最佳节点上运行起来
-编排: 按照用户的意愿以及整个系统的规则，完全自动化地处理好容器之间的各种关系
+- 声明式API: 一切都是资源, 自动化, 兼顾性能、API完备性、版本化、向后兼容等很多工程化指标
+- 控制器模式: 循环控制, 让状态达到最终一致性
+- 自定义CRD: CRD(Custom Resource Definition), 自定义API资源
+- 插件机制: 支持CSI、CRI不同的实现
+- 调度: 把一个容器按照某种规则，放置到某个最佳节点上运行起来
+- 编排: 按照用户的意愿以及整个系统的规则，完全自动化地处理好容器之间的各种关系
 
 ## 架构
 
 - master： API、Schedule、Manager, 默认情况下master节点是不允许运行用户的pod， 但可以依靠kubernetesd 的Taint/Toleration机制 实现可以调度
 - node：kubelet, CRI（Container Runtime interface）， Device Plugin， CNI（Container Networking Interface）和CSI（Container Storage Interface）
 
-核心组件
+核心组件:
 
 - etcd保存了整个集群的状态
 - apiserver提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现等机制
@@ -32,6 +32,12 @@
 - federation 提供跨可用区的集群
 
 ## 基本组件
+
+- 类型
+  - 资源对象：Pod、ReplicaSet、Deployment、StatefuleSet、DaemenSet
+  - 存储对象：volume、PersistentVolume、Secret、ConfigMap
+  - 策略对象：securityContext、ResourceQuota、LimitRange
+  - 身份对象：serviceAccount、role、clusterRole
 
 ![主要组件](./images/k8s主要组件.png)
 ![主要架构](./images/pod主要组件.png)
@@ -107,8 +113,14 @@ pod结构
 livenessProbe 判断pod中的应用容器是否健康，可以理解成健康检查
 readnessProbe 判断pod是否已经就绪， 可以接收请求和访问。
 
-Pod中reloadable打开后，可以更新pod中某个container的镜像更新
-只有处于running状态， 且 readness Probe检查通过的pod， 才会出现service 的endpoints 列表中
+### 特殊pod
+
+- init容器
+  - 在容器启动之前运行， 用于运行容器中不存在的实用工具或安装脚本
+  - 多个init容器会顺序执行，当所有的init容器运行完成后，才能初始化pod和运行容器
+  - init容器提供了一种简单的阻塞或者延迟应用容器启动的方法
+  - init容器的代码应该是幂等的
+- pause容器（infra容器: 实现pod内部容器共享网络，都加入了这个pause container的namespace
 
 ### service
 
@@ -141,6 +153,27 @@ statefulSet适合数据库服务，集群化管理服务等有状态服务。
 
 daemonSet是后台支撑服务集， 存储，日志和监控在每个节点上支撑k8s集群运行的服务
 
+### secret
+
+类型:
+
+- service account：用来访问k8s api
+- opeque：base64编码的secret，用来存储秘钥等
+- docker configjson：用来存储私有docker registry的认证信息
+
+使用方式:
+
+- 以Volume方式挂载使用
+- 以环境变量方式使用
+
+### configMap
+
+类似Linux系统中的/etc目录:
+
+- 设置环境变量的值
+- 在容器中设置命令行参数
+- 在数据卷里面创建config文件
+
 ### ingress
 
 ingress是基于Http/Https之上的七层负载均衡，是一堆Http路由规则的集合
@@ -149,30 +182,33 @@ ingress是基于Http/Https之上的七层负载均衡，是一堆Http路由规�
 - ingress class：解耦ingress 和 ingress controller
 ingress controller的pod，由于网络隔离的原因，还需要对外通过service暴露网络
 
+### cronjob
+
+- 在给定的时间点只运行一次
+- 周期性的在给定时间点运行
+
+### HPA
+
+根据检测到的metric自动的扩容 rs、deployment等
+
+- 由控制循环实现，默认是30s
+- metric可以由：Heapster和Rest客户端访问
+- 支持自定义的metric：cpu、内存和qps
+
 ### 存储
 
-- CSI: 容器存储接口，提供存储资源
+CSI: 容器存储接口，提供存储资源
 
-Union File System联合文件系统，将多个不同位置的目录联合挂载到同一个目录下，增量rootfs层
-只读层 + init层 + 可读写层， whiteout 覆盖只读层的文件
-init层只对当前的docker生效，在提交时智慧提交可读写层， 不包含init层
+Volume Type:
 
-k8s卷的内容
-
-- Empty Dir: 声明周期与pod相同，pod删除时，empty Dir也会删除，主要用于某些应用程序无需多久保存的临时目录，多个容器的共享目录等， 是Pod分配到Node上时被自动创建的
+- Empty Dir: 生命周期与pod相同，pod删除时，empty Dir也会删除，主要用于某些应用程序无需多久保存的临时目录，多个容器的共享目录等， 是Pod分配到Node上时被自动创建的
 - Host Path：为pod挂载宿主机上的目录或文件，使得容器可以使用宿主机的文件系统进行存储，缺点是动态调度在不同的node上，下次调度到其他节点时，无法使用之前节点上的存储文件。（支持如果文件或目录不存在，就创建一个的功能）
 
-PVC: persistent volume claim，特殊的volume，需要与实现进一步绑定
-PV: persistent vlume
-
-storage class自动地为集群里存在的每一个pvc，调用存储插件创建对应的PV
-
-pv 和pvc的绑定
+storage class自动地为集群里存在的每一个pvc，调用存储插件创建对应的PV  
+pv 和pvc的绑定:
 
 - pv的存储大小必须满足pvc的要求
 - pv和pvc的storage class name字段必须一样
-
-Volume机制，允许将宿主机指定的目录或者文件，挂载到容器中进行读取和修改操作
 
 ### 网络插件
 
@@ -186,24 +222,19 @@ Volume机制，允许将宿主机指定的目录或者文件，挂载到容器�
   - 为每个node分配subnet，容器将自动从该子网中获取IP地址
   - 当有node加入到网络时，为每个node增加路由配置
 
-netfilter子系统的作用，就是在Linux内核里挡在网卡 和 用户态进程之间的一道 ”防火墙“
-network policy其实只是宿主机上的一系列iptables的规则, 已经实现network policy的网络查件包括 calico、weave 和 kube-router
-通过控制循环的方式对network policy对象的增删改查做出响应，然后在宿主机上完成iptables规则的配置工作
-基于iptables的service实现，实际是一组随机模式的iptables链
-基于ipvs的service实现， ipvs并不需要在宿主机为每个pod设置iptables规则
+netfilter子系统的作用，就是在Linux内核里挡在网卡 和 用户态进程之间的一道 ”防火墙“, network policy其实只是宿主机上的一系列iptables的规则, 已经实现network policy的网络查件包括 calico、weave 和 kube-router, 通过控制循环的方式对network policy对象的增删改查做出响应，然后在宿主机上完成iptables规则的配置工作, 
 
-TUN设备是一种工作在三层（Network Layer）的虚拟网络设备给。 TUN设备的功能非常简单，即在操作系统内核和用户应用程序之间传递IP包
-UDP: 使用flannel进程在机器之间进行转发，性能较低
-VXLAN: 虚拟可扩展局域网，VTEP: VXLAN Tunnel End Poin(虚拟隧道端点）， VTEP的封装和解封装对象， 是二层的数据帧
+- 基于iptables的service实现，实际是一组随机模式的iptables链
+- 基于ipvs的service实现， ipvs并不需要在宿主机为每个pod设置iptables规则
+
+- UDP: 使用flannel进程在机器之间进行转发，性能较低
+- TUN设备是一种工作在三层（Network Layer）的虚拟网络设备给。 TUN设备的功能非常简单，即在操作系统内核和用户应用程序之间传递IP包
+- VXLAN: 虚拟可扩展局域网
+- VTEP: VXLAN Tunnel End Poin(虚拟隧道端点）， VTEP的封装和解封装对象， 是二层的数据帧
 
 ### namespace
 
 NameSpace是Kubernetes项目里的一个逻辑管理单位，并没有提供实际的隔离或者多租户能力
-
-## 跨平台
-
-容器使用的内核和宿主机使用的内核是一致的。 如果应用依赖内核版本，就无法跨平台。 Windows系统会给容器外面套一个vm，所以也能运行linux容器
-Docker on Mac 以及windows Docker（Hyper -V实现） 实际上是基于虚拟化技术实现的。 而Linux容器则是真正的容器
 
 ## 高可用
 
