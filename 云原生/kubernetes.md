@@ -195,6 +195,10 @@ ingress controller的pod，由于网络隔离的原因，还需要对外通过se
 - metric可以由：Heapster和Rest客户端访问
 - 支持自定义的metric：cpu、内存和qps
 
+### VPA
+
+Vertical Pod Auto Scaler
+
 ### 存储
 
 CSI: 容器存储接口，提供存储资源
