@@ -44,7 +44,7 @@ zk可单机也可集群部署
 - 集群间通过zab（zookeeper atomic broadcast）协议保证数据一致性
 - 一个更新操作成功，当且仅当大多数server在内存中成功修改了数据
 
-![zk架构图](./../images/zk架构图.jpeg)
+![zk架构图](../images/zk架构图.jpeg)
 
 ### 模型抽象
 
