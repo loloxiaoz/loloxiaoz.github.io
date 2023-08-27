@@ -19,7 +19,7 @@ Compaction是leveldb最为复杂的过程之一，同样也是leveldb的性能�
 - Compaction起到了平衡读写差异的作用
 
 
-4、块分为first/middle/last，当读到last时表示log结束
+- 块分为first/middle/last，当读到last时表示log结束
 6、一个拥有k个指针的节点称为k层结点（level node），按照上面概率，50的结点为1层结点，25%的概率为2层几点，12.5%的概率为3层节点，将能获取log（n）的查询效率，插入和删除操作和链表一样
 7、put/delete/get均依赖于底层的跳表的基本操作实现
 8、sstable分为
@@ -79,6 +79,7 @@ while(random(0,1))
 
 Bigtable中有三种compaction。
 minor compaction就是将immutable memtable导出到SSTable中，major compaction就是将不同层级的SSTable文件合并，full compaction就是将所有SSTABLE 合并。
+
 
 LEVEL DB中包含其中两种。 minor compaction 和 major compaction
 minor compaction 就是将immutable compaction的内容，从小到大遍历一遍，并依此写入level 0的新建SSTable文件中，写完后建立文件的index数据，就完成了一次minor compaction
