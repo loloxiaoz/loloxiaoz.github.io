@@ -68,7 +68,7 @@ zk可单机也可集群部署
 | follower | follower用于接受客户请求并向客户端返回结果，在选主过程中参与投票                                          |
 | observer | Observer可以接受客户端连接，但不参与投票过程，只同步leader状态， Observer的目的不是扩展系统，提高读取速度 |
 
-![zk server](zab工作流程)
+![zk server](./../images/zk%20server流程图.jpeg)
 
 ### 数据模型
 
