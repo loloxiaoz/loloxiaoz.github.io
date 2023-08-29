@@ -1,5 +1,7 @@
 # Linux中IO模型
 
+![内核空间与用户空间](./images/内核空间与用户空间.png)
+
 ## 五种IO模型
 
 ![五种IO模型](./images/五种IO模型.png)
