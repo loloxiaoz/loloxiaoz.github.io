@@ -1,7 +1,20 @@
-# GPT
+# LLM
 
-神经网络语言模型: NLP -> cnn/rnn -> transformer-base
-求解NLP task: word2vector + ML -> pretain + fine-tuning
+## 术语表
+
+| 英文缩写 | 英文                        | 中文           |
+| -------- | --------------------------- | -------------- |
+| NLP      | Natural Language Processing | 自然语言处理   |
+| PLM      | Pre-train Language Model    | 预训练语言模型 |
+| NLM      | Netural Language Model      | 神经语言模型   |
+| LLM      | Lagre Language Model        | 大语言模型     |
+
+发展路径
+
+- 统计语言模型: SLM, N元语言模型, 基于马尔科夫假设建立词预测模型
+- 神经语言模型: NLM, RNN来描述单词序列的概率, Word2Vec提出构建一个简化浅层神经网络
+- 预训练语言模型: PLM, 基于高度并行化Transformer架构, BERT, 确立了"预训练和微调"学习范式
+- 大语言模型: LLM, 千亿参数的transformer语言模型，GPT, 拥有涌现、思维链等能力
 
 ## 涌现&思维链
 
