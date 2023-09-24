@@ -28,7 +28,7 @@
 - prompt: 提示词管理、优化和序列化
 - memory: 指在链/代理调用之间持续存在的状态
 - indexes: 用于加载、查询和更新外部数据的接口和集成
-- chain: 是结构化的调用序列
+- chain: 是结构化的调用序列, 流程编排?
 - agents: 是一个链，其中LLM在给定高级指令和一组工具的情况下, 反复决定操作，执行操作并观察结果, 直到高级指令完成
 - callbacks: 回调允许记录和流式传输任何链的中间步骤，从而进行观察、调试和评估应用程序的内部
 
@@ -36,7 +36,21 @@
 
 ![chatGLM](./images/langchain+chatglm.png)
 
-## ChatGLM-6B
+LangChain-ChatGLM 是一个基于ChatGLM等大语言模型的本地知识库问答实现  
+特点:
+
+- 依托ChatGLM等开源模型, 可离线部署
+- 基于langchain实现，可快速接入多种数据源
+- 在分句、文档读取方面，针对中文场景进行优化
+- 支持pdf、txt、md等文件类型接入、具备命令行demo、webui等
+
+优化方向
+
+- 模型微调: 对llm和embedding基于专业领域数据进行微调
+- 文档加工: 在文档分段后，对每段分别进行总结, 基于总结内容语义进行匹配
+- 借助不同模型能力: 在tex22sql,text2cpyher等场景需要产生代码时，可借助不同模型能力
+
+### ChatGLM-6B
 
 支持中英双语的对话语言模型, 基于General-Language Model(GLM)架构, 具有62亿模型
 
