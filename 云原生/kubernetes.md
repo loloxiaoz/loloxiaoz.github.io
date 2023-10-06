@@ -226,7 +226,7 @@ pv 和pvc的绑定:
   - 为每个node分配subnet，容器将自动从该子网中获取IP地址
   - 当有node加入到网络时，为每个node增加路由配置
 
-netfilter子系统的作用，就是在Linux内核里挡在网卡 和 用户态进程之间的一道 ”防火墙“, network policy其实只是宿主机上的一系列iptables的规则, 已经实现network policy的网络查件包括 calico、weave 和 kube-router, 通过控制循环的方式对network policy对象的增删改查做出响应，然后在宿主机上完成iptables规则的配置工作, 
+netfilter子系统的作用，就是在Linux内核里挡在网卡 和 用户态进程之间的一道 ”防火墙“, network policy其实只是宿主机上的一系列iptables的规则, 已经实现network policy的网络查件包括 calico、weave 和 kube-router, 通过控制循环的方式对network policy对象的增删改查做出响应，然后在宿主机上完成iptables规则的配置工作
 
 - 基于iptables的service实现，实际是一组随机模式的iptables链
 - 基于ipvs的service实现， ipvs并不需要在宿主机为每个pod设置iptables规则
