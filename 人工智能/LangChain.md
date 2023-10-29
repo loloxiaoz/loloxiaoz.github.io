@@ -2,11 +2,9 @@
 
 > 用于开发由语言模型驱动的应用程序的框架
 
-主要功能
-
-- 调用语言模型
-- 将不同数据源接入到语言模型交互中
-- 允许语言模型与运行环境交互  
+- 上层应用和模型基座绑死。切换模型基座时，上层逻辑不得不大量修改。在 LLM 蓬勃发展的当下，无论是处于成本、License、研究热点还是性能等各方面考虑，基座变更几乎不可避免。
+- 处理环节不完善，开发成本高。比如：向量存储和搜索，LLM 提示词生成，数据链路（导入、分片、加工）等等。如果全部手撸，成本过高。
+- 缺少标准化。轮子不但要丰富还要标准化，以结合场景灵活编排。一个粗浅的比喻是——我们需要 “乐高” 。
 
 ## 应用场景
 
@@ -22,21 +20,42 @@
 - 信息提取:
 - 文档总结
 
-## 模块
+主要功能
 
-- modules: 支持模型类型和集成
-- prompt: 提示词管理、优化和序列化
-- memory: 指在链/代理调用之间持续存在的状态
-- indexes: 用于加载、查询和更新外部数据的接口和集成
-- chain: 是结构化的调用序列, 流程编排?
-- agents: 是一个链，其中LLM在给定高级指令和一组工具的情况下, 反复决定操作，执行操作并观察结果, 直到高级指令完成
-- callbacks: 回调允许记录和流式传输任何链的中间步骤，从而进行观察、调试和评估应用程序的内部
+- 调用语言模型
+- 将不同数据源接入到语言模型交互中
+- 允许语言模型与运行环境交互
+
+## 应用构建
+
+![流程交互图](./images/langchain流程交互图.jpeg)
+
+- model: 模型。可选择不同的LLM与Embedding模型
+- prompt: 提示。g管理LLM的输入。包括prompt模版等
+- index: 索引。对文档结构化的方法。包括Document Loaders（文档加载器）、Text Splitters（文本拆分器）、VectorStores（向量存储器）以及Retrievers（检索器）
+- chains: 链。将LLM与其他组件结合。将各种组件统一到应用程序的方法, 可以动态的帮我们选择和调用chain或者已有工具
+  - stuff: 把document一次全部传给llm模型进行总结
+  - map_reduce: 会把每个document进行总结， 最后将所有document总结出的结果再进行一次总结
+  - refine: 先总结第一个document,然后在第一个document总结出的内容和第二个document一起发给llm模型
+  - map_rerank: 用在问题chain上，搜索答案的匹配方式
+- agent: 代理。访问其他工具。Agents是LLM与工具之间的接口, Agents用来确定任务与工具
+  - zero-shot-react-description: 根据工具的描述和请求内容来决定使用哪个工具
+  - react-docstore: 使用ReAct框架docstore交互, 使用search 和 Lookup工具，前者用来搜，后者寻找term，举例: Wikipedia工具
+  - self-ask-with-search: 使用Intermediate Answer, 为问题寻找事实答案, 如Google Search API工具
+  - conversational-react-description: 为会话设置而设计的代理, 它的prompt会被设计的具有会话性，且还是会使用ReAct框架决定使用哪个工具
+- memory: 记忆存储。默认LLM对历史内容没有记忆功能, memory用来管理和维护历史对话内容
+
+## 定位
+
+服务层: 将各种语言模型或外部资源整合, 构建实用的LLM模型
+
+代表性框架LangChain、AutoGPT、Llama-index等
 
 ## 基于本地知识库
 
 ![chatGLM](./images/langchain+chatglm.png)
 
-LangChain-ChatGLM 是一个基于ChatGLM等大语言模型的本地知识库问答实现  
+LangChain-ChatGLM 是一个基于ChatGLM等大语言模型的本地知识库问答实现
 特点:
 
 - 依托ChatGLM等开源模型, 可离线部署
@@ -56,5 +75,5 @@ LangChain-ChatGLM 是一个基于ChatGLM等大语言模型的本地知识库问�
 
 - 自我认知:
 - 提纲写作:
-- 文案写作: 
+- 文案写作:
 - 信息抽取:
