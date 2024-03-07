@@ -1,4 +1,4 @@
-# loloxiaoz的技术博客
+# 技术博客
 
 [博客链接](https://loloxiaoz.github.io/)
 
