@@ -13,7 +13,7 @@
 
 - 单个master: 读取并验证nginx配置文件, 管理worker进程
 - 多个worker: 每个worker维护一个线程（避免线程切换）, 处理连接和请求。worker的数量由配置文件决定, 一般和cpu个数相关
-![nginx进程模型](../images/nginx架构图.png)
+![nginx进程模型](./images/nginx架构图.png)
 
 ### 平滑重启
 
@@ -58,7 +58,7 @@ event模块的主要功能就是 监听accept后建立的连接, 对读写事件
 - upstream: 负载均衡配置,
 - location: url匹配特定位置配置
 
-![nginx配置优先级](../images/nginx-conf-配置优先级.png)
+![nginx配置优先级](./images/nginx-conf-配置优先级.png)
 
 ### 用法
 
