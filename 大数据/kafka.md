@@ -20,19 +20,29 @@ kafka的设计理念就是同时提供离线处理和实时处理。
 
 ## kafka为什么性能高
 
+- 异步写: 提供同步和异步两种方式
 - 零拷贝: 通过DMA烤包到NIC buffer，无需cpu拷贝，这也是零拷贝的说法来源。
 - 顺序写:顺序写磁盘比随机写内存效率还要高，这是kafka高吞吐率的一个重要保证。
+- pagecache: 磁盘IO是kafka性能瓶颈，通过page cache，磁盘IO被缓存到内存，然后异步写磁盘。
 - 多partition: partition是最小并发粒度，提供了并行处理的能力, 如果partition设置合理，所有消息可以均匀分布到不同的partition里。 不同的消息可以并行写入不同的partition，极大的提高了吞吐率。
 - 多磁盘: 支持多磁盘driver。
 - 批处理: 减小网络开销。
 - 高效的序列化方式。
-- 压缩算法: ： LZ4 > Snappy > zstd > GZIP, 压缩比： zstd > LZ4 > GZIP > Snappy。
+- 压缩算法:  LZ4 > Snappy > zstd > GZIP, 压缩比： zstd > LZ4 > GZIP > Snappy。
+- 稀疏索引: 时间索引文件、相对位置索引文件、日志明细
+- 多reactor多线程网络模型:
 
 ## kafka为什么能保证消息可靠性
 
-- 一致性协议: zookeeper的zab协议,  强一致性协议，消息提交需要全部的foller都确认后再发送ack。
+- 一致性协议: zookeeper的zab协议,  强一致性协议，消息提交需要全部的follower都确认后再发送ack。
 - 消息持久化: kafka集群保留所有的消息，无论是否被消费，基于策略删除旧数据, 只对已提交的消息做有限度的持久化保证。
-- ISR: ISR实现了可用性与数据一致性的动态平衡（in-sync replica set), 如果follower长时间未向leader同步数据， 该follower将被提出ISR。 1、避免了最慢的follow拖慢整体速度2、只有commit过的消息才会被consumer消费，故提高了数据的一致性3、可以只包含leader，极大提高了可容忍的宕机的follower的数量
+- ISR: ISR实现了可用性与数据一致性的动态平衡（in-sync replica set), 如果follower长时间未向leader同步数据， 该follower将被提出ISR。
+  - 避免了最慢的follow拖慢整体速度
+  - 只有commit过的消息才会被consumer消费，如下图高水位, 故提高了数据的一致性
+  - 可以只包含leader，极大提高了可容忍的宕机的follower的数量
+  - leader或者follower 宕机后，只会在ISR里选举一个当新的leader
+
+![Kafka](./images/kafka的ISR.webp)
 
 ## kafka的典型设计
 
