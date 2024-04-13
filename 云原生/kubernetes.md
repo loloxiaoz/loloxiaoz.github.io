@@ -85,6 +85,8 @@ control manager 是watch变化，然后不断重试，然后达到最终一致�
 
 监控service的配置，并完成负载均衡的配置
 
+![kube-proxy](./images/kube-proxy.webp)
+
 ### pod
 
 Pod是一组紧密关联的容器集合， Pod的IP会随着Pod的重启而变化，共享网络地址和文件系统
