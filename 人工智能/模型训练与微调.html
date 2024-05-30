@@ -1,0 +1,1835 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>模型训练与微调 · loloxiaoz的个人博客</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="loloxiaoz">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="知识图谱.html" />
+    
+    
+    <link rel="prev" href="Transformer.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    web技术
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../web技术/CPU与GPU.html">
+            
+                <a href="../web技术/CPU与GPU.html">
+            
+                    
+                    CPU与GPU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../web技术/Debug.html">
+            
+                <a href="../web技术/Debug.html">
+            
+                    
+                    Debug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../web技术/Linux中IO模型.html">
+            
+                <a href="../web技术/Linux中IO模型.html">
+            
+                    
+                    Linux中IO模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../web技术/Linux内核网络框架.html">
+            
+                <a href="../web技术/Linux内核网络框架.html">
+            
+                    
+                    Linux内核网络框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../web技术/Nginx.html">
+            
+                <a href="../web技术/Nginx.html">
+            
+                    
+                    Nginx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../web技术/Reactor模式.html">
+            
+                <a href="../web技术/Reactor模式.html">
+            
+                    
+                    Reactor模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../web技术/wasm.html">
+            
+                <a href="../web技术/wasm.html">
+            
+                    
+                    Wasm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../web技术/工作流引擎.html">
+            
+                <a href="../web技术/工作流引擎.html">
+            
+                    
+                    工作流引擎
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../web技术/排序算法.html">
+            
+                <a href="../web技术/排序算法.html">
+            
+                    
+                    排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../web技术/插件框架.html">
+            
+                <a href="../web技术/插件框架.html">
+            
+                    
+                    插件框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../web技术/缓存.html">
+            
+                <a href="../web技术/缓存.html">
+            
+                    
+                    缓存
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="../web技术/负载均衡.html">
+            
+                <a href="../web技术/负载均衡.html">
+            
+                    
+                    负载均衡
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="../web技术/长连接服务.html">
+            
+                <a href="../web技术/长连接服务.html">
+            
+                    
+                    长连接服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.14" data-path="../web技术/零拷贝.html">
+            
+                <a href="../web技术/零拷贝.html">
+            
+                    
+                    零拷贝
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    业务案例
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../业务案例/业务应用管理.html">
+            
+                <a href="../业务案例/业务应用管理.html">
+            
+                    
+                    业务应用管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../业务案例/工程师文化.html">
+            
+                <a href="../业务案例/工程师文化.html">
+            
+                    
+                    工程师文化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../业务案例/海量日志处理.html">
+            
+                <a href="../业务案例/海量日志处理.html">
+            
+                    
+                    海量日志处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    云原生
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../云原生/docker.html">
+            
+                <a href="../云原生/docker.html">
+            
+                    
+                    Docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../云原生/helm.html">
+            
+                <a href="../云原生/helm.html">
+            
+                    
+                    Helm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../云原生/kubernetes.html">
+            
+                <a href="../云原生/kubernetes.html">
+            
+                    
+                    Kubernetes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../云原生/prometheus.html">
+            
+                <a href="../云原生/prometheus.html">
+            
+                    
+                    Prometheus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../云原生/云原生概述.html">
+            
+                <a href="../云原生/云原生概述.html">
+            
+                    
+                    云原生概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../云原生/云原生网络.html">
+            
+                <a href="../云原生/云原生网络.html">
+            
+                    
+                    云原生网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../云原生/混沌工程.html">
+            
+                <a href="../云原生/混沌工程.html">
+            
+                    
+                    混沌工程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    人工智能
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Agent.html">
+            
+                <a href="Agent.html">
+            
+                    
+                    Agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="Attention.html">
+            
+                <a href="Attention.html">
+            
+                    
+                    Attention
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="LangChain.html">
+            
+                <a href="LangChain.html">
+            
+                    
+                    Lang Chain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="LLM.html">
+            
+                <a href="LLM.html">
+            
+                    
+                    LLM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="LLM轻量化.html">
+            
+                <a href="LLM轻量化.html">
+            
+                    
+                    LLM轻量化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Transformer.html">
+            
+                <a href="Transformer.html">
+            
+                    
+                    Transformer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.7" data-path="模型训练与微调.html">
+            
+                <a href="模型训练与微调.html">
+            
+                    
+                    模型训练与微调
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="知识图谱.html">
+            
+                <a href="知识图谱.html">
+            
+                    
+                    知识图谱
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="行业应用.html">
+            
+                <a href="行业应用.html">
+            
+                    
+                    行业应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    分布式系统
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" >
+            
+                <span>
+            
+                    
+                    分布式协议
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1.1" data-path="../分布式系统/分布式协议/paxos.html">
+            
+                <a href="../分布式系统/分布式协议/paxos.html">
+            
+                    
+                    Paxos
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.1.2" data-path="../分布式系统/分布式协议/raft.html">
+            
+                <a href="../分布式系统/分布式协议/raft.html">
+            
+                    
+                    Raft
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" >
+            
+                <span>
+            
+                    
+                    分布式协调
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../分布式系统/分布式协调/etcd.html">
+            
+                <a href="../分布式系统/分布式协调/etcd.html">
+            
+                    
+                    Etcd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../分布式系统/分布式协调/zookeeper.html">
+            
+                <a href="../分布式系统/分布式协调/zookeeper.html">
+            
+                    
+                    Zookeeper
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../分布式系统/分布式存储.html">
+            
+                <a href="../分布式系统/分布式存储.html">
+            
+                    
+                    分布式存储
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../分布式系统/分布式理论.html">
+            
+                <a href="../分布式系统/分布式理论.html">
+            
+                    
+                    分布式理论
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../分布式系统/分布式锁.html">
+            
+                <a href="../分布式系统/分布式锁.html">
+            
+                    
+                    分布式锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    团队管理
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../团队管理/效率.html">
+            
+                <a href="../团队管理/效率.html">
+            
+                    
+                    效率
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    大数据
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../大数据/CDC.html">
+            
+                <a href="../大数据/CDC.html">
+            
+                    
+                    CDC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../大数据/clickhouse.html">
+            
+                <a href="../大数据/clickhouse.html">
+            
+                    
+                    Clickhouse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../大数据/hbase.html">
+            
+                <a href="../大数据/hbase.html">
+            
+                    
+                    Hbase
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../大数据/kafka.html">
+            
+                <a href="../大数据/kafka.html">
+            
+                    
+                    Kafka
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../大数据/pulsar.html">
+            
+                <a href="../大数据/pulsar.html">
+            
+                    
+                    Pulsar
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../大数据/云原生大数据.html">
+            
+                <a href="../大数据/云原生大数据.html">
+            
+                    
+                    云原生大数据
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../大数据/数据中台.html">
+            
+                <a href="../大数据/数据中台.html">
+            
+                    
+                    数据中台
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../大数据/数据仓库.html">
+            
+                <a href="../大数据/数据仓库.html">
+            
+                    
+                    数据仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../大数据/数据湖.html">
+            
+                <a href="../大数据/数据湖.html">
+            
+                    
+                    数据湖
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.10" data-path="../大数据/流式分析引擎.html">
+            
+                <a href="../大数据/流式分析引擎.html">
+            
+                    
+                    流式分析引擎
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    开发语言
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../开发语言/go.html">
+            
+                <a href="../开发语言/go.html">
+            
+                    
+                    Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    操作系统
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../操作系统/内核笔记.html">
+            
+                <a href="../操作系统/内核笔记.html">
+            
+                    
+                    内核笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../操作系统/操作系统笔记.html">
+            
+                <a href="../操作系统/操作系统笔记.html">
+            
+                    
+                    操作系统笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../操作系统/计算机组成原理.html">
+            
+                <a href="../操作系统/计算机组成原理.html">
+            
+                    
+                    计算机组成原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    数据库
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" >
+            
+                <span>
+            
+                    
+                    关系型数据库
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1.1" data-path="../数据库/关系型数据库/mysql.html">
+            
+                <a href="../数据库/关系型数据库/mysql.html">
+            
+                    
+                    Mysql
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.1.2" data-path="../数据库/关系型数据库/postgres.html">
+            
+                <a href="../数据库/关系型数据库/postgres.html">
+            
+                    
+                    Postgres
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../数据库/向量数据库/向量数据库.html">
+            
+                <a href="../数据库/向量数据库/向量数据库.html">
+            
+                    
+                    向量数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" >
+            
+                <span>
+            
+                    
+                    图数据库
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.3.1" data-path="../数据库/图数据库/nebula.html">
+            
+                <a href="../数据库/图数据库/nebula.html">
+            
+                    
+                    Nebula
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3.2" data-path="../数据库/图数据库/redisgraph.html">
+            
+                <a href="../数据库/图数据库/redisgraph.html">
+            
+                    
+                    Redisgraph
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" >
+            
+                <span>
+            
+                    
+                    搜索引擎
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.4.1" data-path="../数据库/搜索引擎/elasticsearch.html">
+            
+                <a href="../数据库/搜索引擎/elasticsearch.html">
+            
+                    
+                    Elasticsearch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4.2" data-path="../数据库/搜索引擎/meilisearch.html">
+            
+                <a href="../数据库/搜索引擎/meilisearch.html">
+            
+                    
+                    Meilisearch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4.3" data-path="../数据库/搜索引擎/sonic.html">
+            
+                <a href="../数据库/搜索引擎/sonic.html">
+            
+                    
+                    Sonic
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" >
+            
+                <span>
+            
+                    
+                    非关系型数据库
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.5.1" data-path="../数据库/非关系型数据库/mongoDB.html">
+            
+                <a href="../数据库/非关系型数据库/mongoDB.html">
+            
+                    
+                    Mongo DB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5.2" data-path="../数据库/非关系型数据库/redis.html">
+            
+                <a href="../数据库/非关系型数据库/redis.html">
+            
+                    
+                    Redis
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../数据库/LevelDB.html">
+            
+                <a href="../数据库/LevelDB.html">
+            
+                    
+                    Level DB
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" >
+            
+                <span>
+            
+                    
+                    架构设计
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../架构设计/安全性.html">
+            
+                <a href="../架构设计/安全性.html">
+            
+                    
+                    安全性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../架构设计/架构可视化.html">
+            
+                <a href="../架构设计/架构可视化.html">
+            
+                    
+                    架构可视化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../架构设计/架构能力.html">
+            
+                <a href="../架构设计/架构能力.html">
+            
+                    
+                    架构能力
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../架构设计/评审标准.html">
+            
+                <a href="../架构设计/评审标准.html">
+            
+                    
+                    评审标准
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../架构设计/领域驱动设计.html">
+            
+                <a href="../架构设计/领域驱动设计.html">
+            
+                    
+                    领域驱动设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../架构设计/高可用.html">
+            
+                <a href="../架构设计/高可用.html">
+            
+                    
+                    高可用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../架构设计/高性能.html">
+            
+                <a href="../架构设计/高性能.html">
+            
+                    
+                    高性能
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" >
+            
+                <span>
+            
+                    
+                    网络安全
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../网络安全/业务思考.html">
+            
+                <a href="../网络安全/业务思考.html">
+            
+                    
+                    业务思考
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../网络安全/关联分析引擎.html">
+            
+                <a href="../网络安全/关联分析引擎.html">
+            
+                    
+                    关联分析引擎
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../网络安全/态势感知.html">
+            
+                <a href="../网络安全/态势感知.html">
+            
+                    
+                    态势感知
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
+            
+                <span>
+            
+                    
+                    自动驾驶
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../自动驾驶/ransac算法.html">
+            
+                <a href="../自动驾驶/ransac算法.html">
+            
+                    
+                    ransac算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../自动驾驶/图优化.html">
+            
+                <a href="../自动驾驶/图优化.html">
+            
+                    
+                    图优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" >
+            
+                <span>
+            
+                    
+                    计算机网络
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../计算机网络/tcp协议.html">
+            
+                <a href="../计算机网络/tcp协议.html">
+            
+                    
+                    tcp协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../计算机网络/网络协议.html">
+            
+                <a href="../计算机网络/网络协议.html">
+            
+                    
+                    网络协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="../TODO.html">
+            
+                <a href="../TODO.html">
+            
+                    
+                    TODO
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >模型训练与微调</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x6A21;&#x578B;&#x5FAE;&#x8C03;">&#x6A21;&#x578B;&#x5FAE;&#x8C03;</h1>
+<blockquote>
+<p><code>&#x9884;&#x8BAD;&#x7EC3;&#x8BED;&#x8A00;&#x6A21;&#x578B;</code> + <code>&#x4E0B;&#x6E38;&#x4EFB;&#x52A1;&#x5FAE;&#x8C03;</code>&#x6210;&#x4E3A;&#x4E3B;&#x6D41;&#x8303;&#x5F0F;</p>
+</blockquote>
+<h2 id="&#x539F;&#x7406;">&#x539F;&#x7406;</h2>
+<ul>
+<li>Self-Attention: &#x81EA;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236;, &#x66F4;&#x5BB9;&#x6613;&#x6355;&#x83B7;&#x53E5;&#x5B50;&#x4E2D;&#x957F;&#x8DDD;&#x79BB;&#x7684;&#x76F8;&#x4E92;&#x4F9D;&#x8D56;&#x7684;&#x7279;&#x5F81;, &#x5728;&#x8BA1;&#x7B97;&#x8FC7;&#x7A0B;&#x4E2D;&#x76F4;&#x63A5;&#x5C06;&#x53E5;&#x5B50;&#x4E2D;&#x4EFB;&#x610F;&#x4E24;&#x4E2A;&#x5355;&#x8BCD;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x8BA1;&#x7B97;&#x6B65;&#x9AA4;&#x8054;&#x7CFB;&#x8D77;&#x6765;</li>
+<li>Multi-Head Attention: &#x591A;&#x5934;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236;, &#x7531;&#x591A;&#x4E2A;&#x81EA;&#x6CE8;&#x610F;&#x529B;&#x7EC4;&#x6210;<ul>
+<li>&#x6269;&#x5C55;&#x4E86;&#x6A21;&#x578B;&#x4E13;&#x6CE8;&#x4E8E;&#x4E0D;&#x540C;&#x4F4D;&#x7F6E;&#x7684;&#x80FD;&#x529B;  </li>
+<li>&#x5C06;&#x8F93;&#x5165;Embedding &#x6295;&#x5F71;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x8868;&#x793A;&#x5B50;&#x7A7A;&#x95F4;, &#x591A;&#x4E2A;head&#x5B66;&#x4E60;&#x5230;&#x7684;Attention&#x4FA7;&#x91CD;&#x70B9;&#x53EF;&#x80FD;&#x7565;&#x6709;&#x4E0D;&#x540C;, &#x7ED9;&#x4E86;&#x6A21;&#x578B;&#x66F4;&#x5927;&#x5BB9;&#x91CF;</li>
+</ul>
+</li>
+</ul>
+<p>&#x968F;&#x7740;<code>&#x6A21;&#x578B;&#x5927;&#x5C0F;</code>, <code>&#x6570;&#x636E;&#x96C6;&#x5927;&#x5C0F;</code>&#x548C;<code>&#x8BAD;&#x7EC3;&#x5F3A;&#x5EA6;</code>&#xFF0C;&#x6A21;&#x578B;&#x6027;&#x80FD;&#x4F1A;&#x63D0;&#x9AD8;&#xFF0C;&#x5E76;&#x4E14;&#x4E3A;&#x4E86;&#x83B7;&#x5F97;&#x6700;&#x4F73;&#x6027;&#x80FD;&#xFF0C;&#x6240;&#x6709;&#x4E09;&#x4E2A;&#x56E0;&#x7D20;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x653E;&#x5927;, &#x5F53;&#x4E0D;&#x53D7;&#x5176;&#x4ED6;&#x4E24;&#x4E2A;&#x56E0;&#x7D20;&#x5236;&#x7EA6;&#x65F6;&#xFF0C;&#x6A21;&#x578B;&#x6027;&#x80FD;&#x4E0E;&#x6BCF;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x56E0;&#x7D20;&#x90FD;&#x6709;&#x5E42;&#x5F8B;&#x5173;&#x7CFB;
+|            | &#x662F;&#x4EC0;&#x4E48;                                                          | &#x9002;&#x7528;&#x573A;&#x666F;                                                               |
+| ---------- | --------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| &#x5FAE;&#x8C03;       | &#x9488;&#x5BF9;&#x9884;&#x5148;&#x8BAD;&#x7EC3;&#x7684;LLM&#xFF0C;&#x5728;&#x7279;&#x5B9A;&#x4EFB;&#x52A1;&#x7684;&#x5C11;&#x91CF;&#x6570;&#x636E;&#x96C6;&#x4E0A;&#xFF0C;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x8FDB;&#x4E00;&#x6B65;&#x8BAD;&#x7EC3; | &#x5F53;&#x4EFB;&#x52A1;&#x6216;&#x57DF;&#x5B9A;&#x4E49;&#x660E;&#x786E;, &#x5E76;&#x4E14;&#x6709;&#x8DB3;&#x591F;&#x6807;&#x8BB0;&#x6570;&#x636E;&#x53EF;&#x4F9B;&#x8BAD;&#x7EC3;&#x65F6;                       |
+| &#x63D0;&#x793A;&#x8BCD;&#x5DE5;&#x7A0B; | &#x6D89;&#x53CA;&#x6D89;&#x53CA;&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x63D0;&#x793A;&#x6216;&#x6307;&#x4EE4;, &#x53EF;&#x4EE5;&#x6307;&#x5BFC;&#x8BED;&#x8A00;&#x6A21;&#x578B;&#x6267;&#x884C;&#x7279;&#x5B9A;&#x4EFB;&#x52A1;        | &#x6700;&#x9002;&#x5408;&#x9700;&#x8981;&#x9AD8;&#x7CBE;&#x5EA6;&#x548C;&#x660E;&#x786E;&#x8F93;&#x51FA;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x63D0;&#x793A;&#x5DE5;&#x7A0B;&#x53EF;&#x7528;&#x4E8E;&#x5236;&#x4F5C;&#x5F15;&#x53D1;&#x6240;&#x9700;&#x8F93;&#x51FA;&#x7684;&#x67E5;&#x8BE2; |</p>
+<h2 id="llm&#x7684;&#x533A;&#x522B;">LLM&#x7684;&#x533A;&#x522B;</h2>
+<table>
+<thead>
+<tr>
+<th>&#x6A21;&#x578B;</th>
+<th>&#x7ED3;&#x6784;</th>
+<th>&#x4F4D;&#x7F6E;&#x7F16;&#x7801;</th>
+<th>&#x6FC0;&#x6D3B;&#x51FD;&#x6570;</th>
+<th>layer nom &#x65B9;&#x6CD5;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x539F;&#x751F;transformer</td>
+<td>Encoder/Decoder</td>
+<td>Sinusoida&#x7F16;&#x7801;</td>
+<td>ReLU</td>
+<td>Post layer norm</td>
+</tr>
+<tr>
+<td>BERT</td>
+<td>Encoder</td>
+<td>&#x7EDD;&#x5BF9;&#x4F4D;&#x7F6E;&#x7F16;&#x7801;</td>
+<td>GeLU</td>
+<td>Post layer norm</td>
+</tr>
+<tr>
+<td>LLaMA</td>
+<td>Casual decoder</td>
+<td>RoPE</td>
+<td>SwiGLU</td>
+<td>Pre RMS Norm</td>
+</tr>
+<tr>
+<td>ChatGLM-6B</td>
+<td>Prefix decoder</td>
+<td>RoPE</td>
+<td>GeGLU</td>
+<td>Post Deep Norm</td>
+</tr>
+<tr>
+<td>Bloom</td>
+<td>Casual decoder</td>
+<td>ALiBi</td>
+<td>GeLU</td>
+<td>Pre Layer Norm</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x53C2;&#x6570;&#x9AD8;&#x6548;&#x5FAE;&#x8C03;">&#x53C2;&#x6570;&#x9AD8;&#x6548;&#x5FAE;&#x8C03;</h2>
+<p>&#x53C2;&#x6570;&#x9AD8;&#x6548;&#x5FAE;&#x8C03;&#x662F;&#x6307;&#x5FAE;&#x8C03;&#x5C11;&#x91CF;&#x6216;&#x989D;&#x5916;&#x7684;&#x6A21;&#x578B;&#x53C2;&#x6570;, &#x56FA;&#x5B9A;&#x5927;&#x90E8;&#x5206;&#x9884;&#x8BAD;&#x7EC3;&#x6A21;&#x578B;&#x53C2;&#x6570;&#xFF0C;&#x4ECE;&#x800C;&#x964D;&#x4F4E;&#x8BA1;&#x7B97;&#x548C;&#x5B58;&#x50A8;&#x6210;&#x672C;, &#x67D0;&#x4E9B;&#x573A;&#x666F;&#x4E0B;&#x6BD4;&#x5168;&#x91CF;&#x5FAE;&#x8C03;&#x6548;&#x679C;&#x66F4;&#x597D;<br>&#x4E3B;&#x8981;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x4E09;&#x7C7B;&#x65B9;&#x6CD5;:</p>
+<ul>
+<li>&#x589E;&#x52A0;&#x989D;&#x5916;&#x53C2;&#x6570;: Adapter-like&#x3001;Soft Prompts</li>
+<li>&#x9009;&#x53D6;&#x4E00;&#x90E8;&#x5206;&#x53C2;&#x6570;&#x66F4;&#x65B0;: BitFit</li>
+<li>&#x5F15;&#x5165;&#x91CD;&#x53C2;&#x6570;&#x5316;: Lora</li>
+</ul>
+<p>&#x5E38;&#x89C1;&#x5FAE;&#x8C03;&#x6280;&#x672F;</p>
+<ul>
+<li>BitFit: &#x4EC5;&#x8C03;&#x6574;bias&#x5C31;&#x80FD;&#x6709;&#x4E0D;&#x9519;&#x7684;&#x6548;&#x679C;</li>
+<li>Prefix-Tuning: &#x5728;&#x6BCF;&#x4E00;&#x4E2A;Transformer&#x5C42;&#x90FD;&#x5E26;&#x4E0A;&#x4E00;&#x4E9B;virtual token&#x4F5C;&#x4E3A;&#x524D;&#x7F00;, &#x4EE5;&#x9002;&#x5E94;&#x4E0D;&#x540C;&#x7684;&#x4EFB;&#x52A1;</li>
+<li>Prompt-Tuning: Prefix-Tuning&#x7684;&#x7B80;&#x5316;&#x7248;&#x672C;, &#x5728;&#x6A21;&#x578B;&#x7684;&#x8F93;&#x5165;&#x6216;&#x9690;&#x5C42;&#x6DFB;&#x52A0;k&#x4E2A;&#x989D;&#x5916;&#x53EF;&#x8BAD;&#x7EC3;&#x7684;tokens, &#x53EA;&#x8BAD;&#x7EC3;&#x8FD9;&#x4E9B;&#x524D;&#x7F6E;&#x53C2;&#x6570;, &#x66F4;&#x8282;&#x7701;&#x5185;&#x5B58;</li>
+<li>P-Tunning: &#x5C06;Prompt&#x8F6C;&#x6362;&#x6210;&#x53EF;&#x4EE5;&#x5B66;&#x4E60;&#x7684;Embedding&#x5C42;&#xFF08;&#x7531;&#x53CC;&#x5411;LSTM+&#x4E24;&#x5C42;MLP&#x7EC4;&#x6210;), &#x6765;&#x5EFA;&#x6A21;virtual token&#x7684;&#x76F8;&#x4E92;&#x4F9D;&#x8D56;&#x4F1A;&#x6536;&#x655B;&#x66F4;&#x5FEB;, &#x6548;&#x679C;&#x66F4;&#x597D;</li>
+<li>P-Tunning V2: &#x5728;&#x6BCF;&#x4E00;&#x4E2A;Transformer&#x5C42;&#x90FD;&#x52A0;&#x5165;&#x4E86;prompt token&#x4F5C;&#x4E3A;&#x8F93;&#x5165;, &#x5F15;&#x5165;&#x591A;&#x4EFB;&#x52A1;&#x5B66;&#x4E60;<ul>
+<li>&#x89E3;&#x51B3;&#x4E86;Prompt Tuning&#x65E0;&#x6CD5;&#x5728;&#x5C0F;&#x6A21;&#x578B;&#x4E0A;&#x6709;&#x6548;&#x63D0;&#x5347;&#x7684;&#x95EE;&#x9898;  </li>
+<li>&#x79FB;&#x9664;&#x4E86;&#x5BF9;&#x6A21;&#x578B;&#x6548;&#x679C;&#x6539;&#x8FDB;&#x8F83;&#x5C0F;&#x7684;&#x91CD;&#x53C2;&#x6570;&#x5316;&#x7F16;&#x7801;&#x5668;(&#x5982;P-Tunnig&#x4E2D;&#x7684;LSTM)</li>
+<li>&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x590D;&#x6742;&#x7684;&#x786C;&#x5E8F;&#x5217;&#x6807;&#x8BB0;&#x4EFB;&#x52A1;&#x53D6;&#x5F97;&#x4E86;&#x4E0D;&#x9519;&#x7684;&#x6548;&#x679C;</li>
+</ul>
+</li>
+<li>Adapter-Tuning: &#x5C06;&#x8F83;&#x5C0F;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x5C42;&#x6216;&#x6A21;&#x5757;&#x63D2;&#x5165;&#x9884;&#x8BAD;&#x7EC3;&#x6A21;&#x578B;&#x7684;&#x6BCF;&#x4E00;&#x5C42;&#xFF0C;&#x4E0B;&#x6E38;&#x4EFB;&#x52A1;&#x5FAE;&#x8C03;&#x65F6;&#x4E5F;&#x53EA;&#x8BAD;&#x7EC3;&#x8FD9;&#x4E9B;&#x9002;&#x914D;&#x53C2;&#x6570;, &#x5728;&#x63A8;&#x7406;&#x65F6;&#x4F1A;&#x989D;&#x5916;&#x589E;&#x52A0;&#x63A8;&#x7406;&#x65F6;&#x957F;</li>
+<li>LoRA: &#x901A;&#x8FC7;&#x5B66;&#x4E60;&#x5C0F;&#x53C2;&#x6570;&#x7684;&#x4F4E;&#x79E9;&#x77E9;&#x9635;, &#x6765;&#x8FD1;&#x4F3C;&#x6A21;&#x578B;&#x6743;&#x91CD;&#x77E9;&#x9635;W&#x7684;&#x53C2;&#x6570;&#x66F4;&#x65B0;, &#x8BAD;&#x7EC3;&#x65F6;&#x53EA;&#x4F18;&#x5316;&#x4F4E;&#x79E9;&#x77E9;&#x9635;&#x53C2;&#x6570;<ul>
+<li>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x53EF;&#x63D2;&#x62D4;&#x7684;&#x5F62;&#x5F0F;&#x5207;&#x6362;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x4EFB;&#x52A1;</li>
+<li>&#x8BBE;&#x8BA1;&#x7684;&#x6BD4;&#x8F83;&#x597D;&#xFF0C;&#x7B80;&#x5355;&#x4E14;&#x6548;&#x679C;&#x597D;</li>
+</ul>
+</li>
+<li>QLoRA: &#x5C06;&#x9884;&#x8BAD;&#x7EC3;&#x6A21;&#x578B;&#x91CF;&#x5316;&#x4E3A;4 bit&#xFF0C;&#x7136;&#x540E;&#x6DFB;&#x52A0;&#x4E00;&#x7EC4;&#x53EF;&#x5B66;&#x4E60;&#x7684;&#x4F4E;&#x79E9;&#x9002;&#x914D;&#x5668;&#x6743;&#x91CD;</li>
+</ul>
+<p><img src="images/P-Tunning.png" alt="P-Tunning v2">
+<img src="images/LoRA.png" alt="Lora"></p>
+<p><a href="https://zhuanlan.zhihu.com/p/636215898" target="_blank">&#x94FE;&#x63A5;</a></p>
+<p>&#x603B;&#x7ED3;: &#x50CF;P-Tunning v2&#x3001;LoRA&#x7B49;&#x90FD;&#x662F;&#x7EFC;&#x5408;&#x8BC4;&#x4F30;&#x5F88;&#x4E0D;&#x9519;&#x7684;&#x9AD8;&#x6548;&#x5FAE;&#x8C03;&#x6280;&#x672F;, &#x5982;&#x679C;&#x663E;&#x5B58;&#x8D44;&#x6E90;&#x6709;&#x9650;,&#x53EF;&#x4EE5;&#x8003;&#x8651;QLoRA, &#x5982;&#x679C;&#x53EA;&#x662F;&#x89E3;&#x51B3;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x4EFB;&#x52A1;&#x573A;&#x666F;, &#x53EF;&#x4EE5;&#x8003;&#x8651;P-Tunning&#x3001;Prompt Tuning</p>
+<p>&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</p>
+<ul>
+<li>&#x660E;&#x786E;&#x6307;&#x51FA;&#x53C2;&#x6570;&#x6570;&#x91CF;&#x7C7B;&#x578B;</li>
+<li>&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684;&#x6A21;&#x578B;&#x8FDB;&#x884C;&#x8BC4;&#x4F30;</li>
+<li>&#x548C;&#x7C7B;&#x4F3C;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;</li>
+<li>&#x6807;&#x51C6;&#x5316;PEFT&#x6D4B;&#x91CF;&#x57FA;&#x51C6;</li>
+<li>&#x91CD;&#x89C6;&#x4EE3;&#x7801;&#x6E05;&#x6670;&#x5EA6;, &#x4EE5;&#x6700;&#x5C0F;&#x5316;&#x8FDB;&#x884C;&#x5B9E;&#x73B0;</li>
+<li>&#x6A21;&#x578B;&#x5E76;&#x884C;: &#x7F51;&#x7EDC;&#x592A;&#x5927;&#xFF0C;&#x4E00;&#x5F20;&#x663E;&#x5361;&#x5B58;&#x4E0D;&#x4E0B;&#xFF0C;&#x62C6;&#x5206;&#x540E;&#x8FDB;&#x884C;&#x6A21;&#x578B;&#x5E76;&#x884C;&#x8BAD;&#x7EC3;</li>
+<li>&#x6570;&#x636E;&#x5E76;&#x884C;: &#x591A;&#x4E2A;&#x663E;&#x5361;&#x540C;&#x65F6;&#x91C7;&#x7528;&#x6570;&#x636E;&#x8BAD;&#x7EC3;&#x7F51;&#x7EDC;&#x7684;&#x526F;&#x672C;</li>
+</ul>
+<h2 id="&#x5206;&#x5E03;&#x5F0F;&#x53C2;&#x6570;&#x4E0E;&#x67B6;&#x6784;">&#x5206;&#x5E03;&#x5F0F;&#x53C2;&#x6570;&#x4E0E;&#x67B6;&#x6784;</h2>
+<ul>
+<li>rank: &#x8FDB;&#x7A0B;&#x7684;&#x5168;&#x5C40;&#x7F16;&#x53F7;</li>
+<li>local_rank: &#x5355;&#x4E2A;node&#x4E0A;&#x7684;&#x672C;&#x5730;&#x7F16;&#x53F7;</li>
+<li>node: &#x7269;&#x7406;&#x8282;&#x70B9;</li>
+<li>nnodes: &#x7269;&#x7406;&#x8282;&#x70B9;&#x6570;&#x91CF;</li>
+<li>node_rank: &#x7269;&#x7406;&#x8282;&#x70B9;&#x5E8F;&#x53F7;</li>
+<li>nnproc_per_node: &#x6BCF;&#x4E2A;&#x7269;&#x7406;&#x8282;&#x70B9;&#x4E0A;&#x9762;&#x8FDB;&#x7A0B;&#x7684;&#x6570;&#x91CF;</li>
+<li>wordsize: &#x5168;&#x5C40;(&#x4E00;&#x4E2A;&#x5206;&#x5E03;&#x5F0F;&#x4EFB;&#x52A1;)&#x4E2D;, rank&#x7684;&#x6570;&#x91CF;</li>
+</ul>
+<p><img src="images/&#x5206;&#x5E03;&#x5F0F;&#x67B6;&#x6784;.webp" alt="&#x5206;&#x5E03;&#x5F0F;&#x67B6;&#x6784;"></p>
+<h2 id="deppspeed">deppspeed</h2>
+<p>DeepSpeed&#x662F;&#x4E00;&#x4E2A;&#x7531;&#x5FAE;&#x8F6F;&#x5F00;&#x53D1;&#x7684;&#x5F00;&#x6E90;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4F18;&#x5316;&#x5E93;, &#x65E8;&#x5728;&#x63D0;&#x9AD8;&#x5927;&#x89C4;&#x6A21;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x7684;&#x6548;&#x7387;&#x548C;&#x53EF;&#x6269;&#x5C55;&#x6027;</p>
+<ul>
+<li>&#x6A21;&#x578B;&#x5E76;&#x884C;&#x5316;</li>
+<li>&#x68AF;&#x5EA6;&#x7D2F;&#x8BA1;</li>
+<li>&#x52A8;&#x6001;&#x7CBE;&#x5EA6;&#x7F29;&#x653E;</li>
+<li>&#x672C;&#x5730;&#x6DF7;&#x5408;&#x7CBE;&#x5EA6;</li>
+</ul>
+<p>&#x8FD8;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x8F85;&#x52A9;&#x5DE5;&#x5177;&#xFF0C;&#x5982;&#x5206;&#x5E03;&#x5F0F;&#x8BAD;&#x7EC3;&#x7BA1;&#x7406;&#xFF0C;&#x5185;&#x5B58;&#x4F18;&#x5316;&#x548C;&#x6A21;&#x578B;&#x538B;&#x7F29;&#x7B49;&#xFF0C;&#x5E76;&#x57FA;&#x4E8E;pytorch&#x6784;&#x5EFA;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x7B80;&#x5355;&#x7684;&#x4FEE;&#x6539;&#x5373;&#x53EF;&#x3002; &#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x5927;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x52A0;&#x901F;&#x5E93;&#xFF0C;&#x4F4D;&#x4E8E;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x6846;&#x67B6;&#x548C;&#x6A21;&#x578B;&#x4E4B;&#x95F4;&#xFF0C;&#x7528;&#x4E8E;&#x63D0;&#x5347;&#x8BAD;&#x7EC3;&#x3001;&#x63A8;&#x7406;&#x7B49;</p>
+<p>&#x4E3B;&#x8981;&#x5305;&#x542B;&#x4E09;&#x90E8;&#x5206;</p>
+<ul>
+<li>API: &#x63D0;&#x4F9B;&#x8BAD;&#x7EC3;&#x6A21;&#x578B;&#x3001;&#x63A8;&#x7406;&#x6A21;&#x578B;&#x7B49;</li>
+<li>Runtime: &#x8FD0;&#x884C;&#x65F6;&#x7EC4;&#x4EF6;&#xFF0C;&#x5982;&#x90E8;&#x7F72;&#x8BAD;&#x7EC3;&#x4EFB;&#x52A1;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x8BBE;&#x5907;&#x3001;&#x6570;&#x636E;&#x5206;&#x533A;&#x3001;&#x6A21;&#x578B;&#x5206;&#x533A;&#x3001;&#x7CFB;&#x7EDF;&#x4F18;&#x5316;&#x3001;&#x5FAE;&#x8C03;&#x3001;&#x6545;&#x969C;&#x68C0;&#x6D4B;&#x7B49;&#xFF0C;&#x4F7F;&#x7528;python&#x5B9E;&#x73B0;</li>
+<li>Ops: &#x7528;C++&#x548C;cuda&#x5B9E;&#x73B0;&#x5E95;&#x5C42;&#x5185;&#x6838;&#xFF0C;&#x4F18;&#x5316;&#x8BA1;&#x7B97;&#x548C;&#x901A;&#x4FE1;&#xFF0C;&#x5982;ultrafast transformer kernel, fuse LAN kernel&#x7B49;</li>
+</ul>
+<p><img src="images/deepspeed&#x67B6;&#x6784;&#x56FE;.webp" alt="&#x8F6F;&#x4EF6;&#x67B6;&#x6784;"></p>
+<ul>
+<li>&#x53EF;&#x4EE5;&#x5728;&#x8BAD;&#x7EC3;&#x6846;&#x67B6;&#x4E0A;&#x8FDB;&#x884C;&#x4E24;&#x90E8;&#x5206;(&#x8BAD;&#x7EC3;&#x548C;&#x63A8;&#x7406;&#x5206;&#x5F00;)&#x4F18;&#x5316;&#xFF1B;</li>
+<li>&#x4E0E;&#x7D27;&#x5BC6;&#x8026;&#x5408;&#x7684;&#x7ED3;&#x6784;&#x6BD4;&#xFF0C;&#x8BE5;&#x7ED3;&#x6784;&#x53EF;&#x4EE5;&#x66F4;&#x597D;&#x7684;&#x5229;&#x7528;&#x6574;&#x4E2A;&#x751F;&#x6001;&#xFF0C;&#x4E14;&#x4E0E;&#x6DF1;&#x5EA6;&#x96C6;&#x6210;&#x76F8;&#x6BD4;&#xFF0C;&#x66F4;&#x5BB9;&#x6613;&#x7EF4;&#x62A4;&#xFF1B;</li>
+<li>&#x4E0E;&#x57FA;&#x7840;&#x8BBE;&#x7F6E;&#x65E0;&#x5173;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x559C;&#x6B22;&#x7684;&#x5E73;&#x53F0;&#xFF0C;&#x5982;Azure ML&#x3001;Azure VMs&#x7B49;</li>
+</ul>
+<h3 id="&#x6838;&#x5FC3;&#x6280;&#x672F;">&#x6838;&#x5FC3;&#x6280;&#x672F;</h3>
+<h3 id="zero&#x96F6;&#x5197;&#x4F59;&#x4F18;&#x5316;&#x5668;">ZeRO(&#x96F6;&#x5197;&#x4F59;&#x4F18;&#x5316;&#x5668;)</h3>
+<p>Zero Redundancy Optimizer, &#x901A;&#x8FC7;&#x5728;&#x6570;&#x636E;&#x5E76;&#x884C;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x5212;&#x5206;&#x6A21;&#x578B;&#x72B6;&#x6001;&#x53C2;&#x6570;&#x3001;&#x68AF;&#x5EA6;&#x548C;&#x4F18;&#x5316;&#x5668;&#x6765;&#x6D88;&#x9664;&#x6570;&#x636E;&#x5E76;&#x884C;&#x8FDB;&#x7A0B;&#x4E2D;&#x7684;&#x5185;&#x5B58;&#x5197;&#x4F59;&#x3002;</p>
+<ul>
+<li>&#x6570;&#x636E;&#x5E76;&#x884C;: &#x8BA1;&#x7B97;&#x6548;&#x7387;&#x9AD8;</li>
+<li>&#x6A21;&#x578B;&#x5E76;&#x884C;: &#x6A21;&#x578B;&#x5206;&#x5C42;&#x5904;&#x7406;&#x3002; &#x663E;&#x5B58;&#x6548;&#x7387;&#x6700;&#x9AD8;&#xFF0C;&#x8BA1;&#x7B97;&#x6548;&#x7387;&#x6700;&#x4F4E;</li>
+<li>&#x6D41;&#x6C34;&#x7EBF;&#x5E76;&#x884C;: &#x6D41;&#x6C34;&#x7EBF;&#x5E76;&#x884C;&#x6A21;&#x578B;&#x7684;&#x5404;&#x5C42;&#x5212;&#x5206;, &#x6DFB;&#x52A0;&#x53C2;&#x6570;&#x5206;&#x5E03;:</li>
+</ul>
+<h3 id="zero-offload">ZeRO-Offload</h3>
+<p>&#x80FD;&#x591F;&#x540C;&#x65F6;&#x5229;&#x7528;CPU&#x548C;GPU&#x5185;&#x5B58;&#x6765;&#x8BAD;&#x7EC3;&#x5927;&#x6A21;&#x578B;&#xFF0C;&#x6838;&#x5FC3;&#x662F;&#x5C06;&#x4F18;&#x5316;&#x5668;&#x72B6;&#x6001;&#x548C;&#x68AF;&#x5EA6;&#x5378;&#x5230;CPU&#x5185;&#x5B58;&#x4E2D;, &#x5B9E;&#x73B0;13B&#x7684;&#x6A21;&#x578B;&#x80FD;&#x591F;&#x5728;V100&#x4E2D;&#x8FDB;&#x884C;&#x8BAD;&#x7EC3;</p>
+<h3 id="deepspeed-sparse-attention">DeepSpeed Sparse Attention</h3>
+<p>&#x57FA;&#x4E8E;&#x6CE8;&#x610F;&#x529B;&#x7684;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x6A21;&#x578B;(&#x5982;transformer)&#x80FD;&#x5F88;&#x597D;&#x6355;&#x6349;&#x8F93;&#x5165;&#x5E8F;&#x5217;token&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4F46;&#x5B9E;&#x8DF5;&#x4E2D;&#x53D7;&#x6CE8;&#x610F;&#x529B;&#x8BA1;&#x7B97;&#x7684;&#x8BA1;&#x7B97;&#x548C;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#x9650;&#x5236;&#x3002; &#x901A;&#x8FC7;&#x6D17;&#x6F31;&#x6CE8;&#x610F;&#x529B;&#x6838;(sparse attention kernel), &#x53EF;&#x4EE5;&#x5C06;&#x6CE8;&#x610F;&#x529B;&#x7684;&#x8BA1;&#x7B97;&#x548C;&#x5185;&#x5B58;&#x9700;&#x6C42;&#x964D;&#x4F4E;&#x51E0;&#x4E2A;&#x6570;&#x91CF;&#x7EA7;</p>
+<h3 id="&#x6BD4;&#x7279;adam">&#x6BD4;&#x7279;Adam</h3>
+<p>Adam&#x662F;&#x4E00;&#x4E2A;&#x5728;&#x5927;&#x89C4;&#x6A21;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x573A;&#x666F;&#x8BAD;&#x7EC3;&#x559C;&#x7231;&#xFF0C;&#x6709;&#x6548;&#x7684;&#x4F18;&#x5316;&#x5668;&#x3002;&#x8BE5;&#x4F18;&#x5316;&#x5668;&#x80FD;&#x6709;&#x6548;&#x51CF;&#x5C11;&#x8DE8;&#x8BBE;&#x5907;&#x5206;&#x5E03;&#x5F0F;&#x7684;&#x8BA1;&#x7B97;&#x3002;</p>
+<ul>
+<li>&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#xFF0C;&#x8D8A;&#x6765;&#x8D8A;&#x6162;: Stage 0 (DDP) &gt; Stage 1 &gt; Stage 2 &gt; Stage 2 + offload &gt; Stage 3 &gt; Stage 3 + offloads</li>
+<li>&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#xFF0C;&#x6240;&#x9700;GPU&#x663E;&#x5B58;&#x8D8A;&#x6765;&#x8D8A;&#x5C11;: Stage 0 (DDP) &lt; Stage 1 &lt; Stage 2 &lt; Stage 2 + offload &lt; Stage 3 &lt; Stage 3 + offloads</li>
+</ul>
+<h2 id="&#x4F18;&#x5316;&#x8BBE;&#x7F6E;">&#x4F18;&#x5316;&#x8BBE;&#x7F6E;</h2>
+<ul>
+<li>batch training: &#x6307;&#x5728;&#x8BAD;&#x7EC3;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x65F6;&#xFF0C;&#x5C06;&#x6570;&#x636E;&#x5206;&#x6210;&#x5C0F;&#x6279;&#x6B21;(batch)&#xFF0C;&#x6BCF;&#x6B21;&#x53EA;&#x7528;&#x4E00;&#x4E2A;&#x5C0F;&#x6279;&#x6B21;&#x7684;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x6A21;&#x578B;&#x53C2;&#x6570;&#x7684;&#x66F4;&#x65B0;&#x64CD;&#x4F5C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5BF9;&#x6574;&#x4E2A;&#x6570;&#x636E;&#x96C6;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x6027;&#x7684;&#x8BAD;&#x7EC3;&#x3002;&#x8FD9;&#x53EF;&#x4EE5;&#x4F7F;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x66F4;&#x52A0;&#x9AD8;&#x6548;&#xFF0C;&#x51CF;&#x5C11;&#x5185;&#x5B58;&#x5360;&#x7528;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x53EF;&#x4EE5;&#x9632;&#x6B62;&#x8FC7;&#x62DF;&#x5408;</li>
+<li>learning rate: &#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4F18;&#x5316;&#x7B97;&#x6CD5;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x8D85;&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x63A7;&#x5236;&#x7740;&#x6BCF;&#x6B21;&#x6A21;&#x578B;&#x53C2;&#x6570;&#x66F4;&#x65B0;&#x7684;&#x6B65;&#x957F;&#x5927;&#x5C0F;&#x3002;&#x8F83;&#x5C0F;&#x7684;&#x5B66;&#x4E60;&#x7387;&#x53EF;&#x4EE5;&#x4F7F;&#x6A21;&#x578B;&#x5B66;&#x4E60;&#x66F4;&#x52A0;&#x7A33;&#x5B9A;&#xFF0C;&#x4F46;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x8FC7;&#x6162;&#xFF1B;&#x800C;&#x8F83;&#x5927;&#x7684;&#x5B66;&#x4E60;&#x7387;&#x53EF;&#x4EE5;&#x52A0;&#x901F;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#xFF0C;&#x4F46;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x6A21;&#x578B;&#x4E0D;&#x7A33;&#x5B9A;&#xFF0C;&#x751A;&#x81F3;&#x65E0;&#x6CD5;&#x6536;&#x655B;</li>
+<li>optimizer: &#x662F;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4F18;&#x5316;&#x7B97;&#x6CD5;&#x4E2D;&#x7684;&#x4E00;&#x79CD;&#xFF0C;&#x5B83;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x6839;&#x636E;&#x635F;&#x5931;&#x51FD;&#x6570;&#x5BF9;&#x6A21;&#x578B;&#x7684;&#x53C2;&#x6570;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF0C;&#x4EE5;&#x4F7F;&#x635F;&#x5931;&#x51FD;&#x6570;&#x6700;&#x5C0F;&#x5316;&#x3002;&#x5E38;&#x89C1;&#x7684;&#x4F18;&#x5316;&#x7B97;&#x6CD5;&#x5305;&#x62EC;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x3001;Adam&#x3001;RMSprop&#x7B49;</li>
+<li>Stabilizing the Training: &#x6307;&#x901A;&#x8FC7;&#x4E00;&#x4E9B;&#x6280;&#x5DE7;&#xFF0C;&#x4F7F;&#x5F97;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x66F4;&#x52A0;&#x7A33;&#x5B9A;&#xFF0C;&#x80FD;&#x591F;&#x66F4;&#x5FEB;&#x5730;&#x6536;&#x655B;&#x5230;&#x6700;&#x4F18;&#x89E3;&#x3002;&#x5E38;&#x89C1;&#x7684;&#x6280;&#x5DE7;&#x5305;&#x62EC;&#x6DFB;&#x52A0;&#x6B63;&#x5219;&#x5316;&#x9879;&#x3001;&#x4F7F;&#x7528;&#x6279;&#x5F52;&#x4E00;&#x5316;&#x3001;&#x4F7F;&#x7528;&#x6B8B;&#x5DEE;&#x8FDE;&#x63A5;&#x7B49;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Transformer.html" class="navigation navigation-prev " aria-label="Previous page: Transformer">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="知识图谱.html" class="navigation navigation-next " aria-label="Next page: 知识图谱">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"模型训练与微调","level":"1.5.7","depth":2,"next":{"title":"知识图谱","level":"1.5.8","depth":2,"path":"人工智能/知识图谱.md","ref":"人工智能/知识图谱.md","articles":[]},"previous":{"title":"Transformer","level":"1.5.6","depth":2,"path":"人工智能/Transformer.md","ref":"人工智能/Transformer.md","articles":[]},"dir":"ltr"},"config":{"plugins":["accordion","simple-page-toc"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"accordion":{},"simple-page-toc":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"loloxiaoz","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"loloxiaoz的个人博客","language":"zh-hans","gitbook":"*"},"file":{"path":"人工智能/模型训练与微调.md","mtime":"2024-05-30T09:08:39.319Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-05-30T09:09:22.095Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
